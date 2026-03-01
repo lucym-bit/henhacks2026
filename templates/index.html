@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cancer Risk by State</title>
+</head>
+<body>
+    <h1>Cancer Risk Calculator</h1>
+
+    <form method="POST">
+        <label for="state">Enter State Abbreviation (e.g., CA):</label>
+        <input type="text" id="state" name="state" maxlength="2" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if state_risk %}
+        <h2>Results:</h2>
+        {% if plot_path %}
+            <img src="{{ plot_path }}" alt="Risk plot" style="max-width:600px;">
+        {% else %}
+            <p>{{ state_risk }}</p>
+        {% endif %}
+        {% if national_risk %}
+            <p>National Average Risk: {{ national_risk:.2f }} per 100,000</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
