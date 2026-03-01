@@ -1,12 +1,24 @@
 # eia_api.py
+import pandas as pd
 import requests
-from config import EIA_BASE_URL, EIA_API_KEY
+from config import EIA_URL, EIA_API_KEY
 
-def get_eia(endpoint, params=None):
-    params = params or {}
-    params["api_key"] = EIA_API_KEY
+def get_eia(start_year, end_year, api_key):
+    params = {
+	"api_key": api_key,
+        "frequency": "annual",
+       	"data": ["value"],
+    	"facets[sectorId][]": "TT",
+	"start": start_year,
+    	"end": end_year,
+       	"offset": 0,
+       	"length": 5000
+    }
+    all_rows = []
+    url = EIA_URL
 
-    url = f"{EIA_BASE_URL}/{endpoint}"
-    r = requests.get(url, params=params)
-    r.raise_for_status()
-    return r.json()
+    response = requests.get(url, params=params)
+    response.raise_for_status()
+
+    data = response.json()["response"]["data"]
+    return pd.DataFrame(data)
