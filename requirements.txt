@@ -1,0 +1,6 @@
+pandas
+numpy
+requests
+sodapy
+Flask
+matplotlib
