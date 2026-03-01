@@ -12,13 +12,5 @@ if EIA_API_KEY is None:
 CDC_DOMAIN = "data.cdc.gov"
 DATASET_ID = "eav7-hnsx"
 
-<<<<<<< Updated upstream
-def get_client(app_token, username=None, password=None):
-    return Socrata(CDC_DOMAIN,
-                 app_token,
-                 username=username,
-                 password=password)
-=======
 def get_client(app_token):
     return Socrata(CDC_DOMAIN, None)
->>>>>>> Stashed changes
